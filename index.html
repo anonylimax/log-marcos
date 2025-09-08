@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Carga</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🚐 Calculadora de Carga</h1>
+
+    <div class="form-group">
+      <label for="mercadoria">Nome da Mercadoria</label>
+      <input type="text" id="mercadoria" placeholder="Ex: Refrigerante">
+    </div>
+
+    <div class="form-group">
+      <label for="registro">Nº de Registro</label>
+      <input type="text" id="registro" placeholder="Ex: 12345">
+    </div>
+
+    <div class="form-group">
+      <label for="volume">Volume de cada caixa (em litros)</label>
+      <input type="number" id="volume" placeholder="Ex: 50">
+    </div>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <!-- Resultado individual -->
+    <div id="resultado" class="resultado"></div>
+
+    <!-- Lista de mercadorias -->
+    <h2>📋 Mercadorias Registradas</h2>
+    <ul id="listaMercadorias"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
