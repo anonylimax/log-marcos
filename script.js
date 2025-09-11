@@ -1,10 +1,22 @@
-const capacidadeVan = 11000; // litros
+const capacidadeVan = 11000; // litros (11.000 dm³)
 let lista = []; // armazena os itens registrados
 
 function calcular() {
   const mercadoria = document.getElementById("mercadoria").value.trim();
   const registro = document.getElementById("registro").value.trim();
-  const volumeCaixa = parseFloat(document.getElementById("volume").value);
+
+  // Pega valores das medidas
+  const comprimento = parseFloat(document.getElementById("comprimento").value);
+  const largura = parseFloat(document.getElementById("largura").value);
+  const altura = parseFloat(document.getElementById("altura").value);
+
+  // Pega valor do volume digitado
+  let volumeCaixa = parseFloat(document.getElementById("volume").value);
+
+  // Se o campo de volume estiver vazio, usa as medidas
+  if ((!volumeCaixa || volumeCaixa <= 0) && comprimento > 0 && largura > 0 && altura > 0) {
+    volumeCaixa = comprimento * largura * altura; // já em dm³
+  }
 
   if (!mercadoria && !registro) {
     alert("Preencha pelo menos o nome da mercadoria ou o número de registro.");
@@ -12,7 +24,7 @@ function calcular() {
   }
 
   if (!volumeCaixa || volumeCaixa <= 0) {
-    alert("Informe um volume válido para a caixa.");
+    alert("Informe um volume válido OU preencha comprimento, largura e altura.");
     return;
   }
 
@@ -22,7 +34,7 @@ function calcular() {
   document.getElementById("resultado").innerHTML = `
     ${mercadoria ? `<p><strong>Mercadoria:</strong> ${mercadoria}</p>` : ""}
     ${registro ? `<p><strong>Registro:</strong> ${registro}</p>` : ""}
-    <p><strong>Volume por caixa:</strong> ${volumeCaixa} L</p>
+    <p><strong>Volume por caixa:</strong> ${volumeCaixa} dm³</p>
     <p><strong>Quantidade de caixas que cabem:</strong> 
       <span style="color:green;font-weight:bold">${caixas}</span>
     </p>
@@ -37,11 +49,6 @@ function calcular() {
   });
 
   atualizarLista();
-
-  // Limpa campos
-  //document.getElementById("mercadoria").value = "";
-  //document.getElementById("registro").value = "";
-  //document.getElementById("volume").value = "";
 }
 
 function atualizarLista() {
@@ -53,7 +60,7 @@ function atualizarLista() {
     li.innerHTML = `
       <strong>${item.mercadoria}</strong> 
       (Registro: ${item.registro}) - 
-      Volume: ${item.volume}L → ${item.caixas} caixas
+      Volume: ${item.volume} dm³ → ${item.caixas} caixas
       <button onclick="remover(${index})">❌</button>
     `;
     ul.appendChild(li);
