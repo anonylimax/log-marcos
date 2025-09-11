@@ -3,50 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Carga</title>
+  <title>Sistema de Mercadorias</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>🚐 Calculadora de Carga</h1>
 
-    <div class="form-group">
-      <label for="mercadoria">Nome da Mercadoria</label>
-      <input type="text" id="mercadoria" placeholder="Ex: Refrigerante">
+    <!-- BOTÃO PARA ABRIR O CADASTRO -->
+    <div class="caixa">
+      <button id="abrirCadastro">📦 Registrar Mercadoria</button>
     </div>
 
-    <div class="form-group">
-      <label for="registro">Nº de Registro</label>
-      <input type="text" id="registro" placeholder="Ex: 12345">
+    <!-- FORMULÁRIO DE CADASTRO (inicialmente oculto) -->
+    <div class="caixa" id="cadastroBox" style="display: none;">
+      <h2>📦 Cadastrar Mercadoria</h2>
+      <form id="form-mercadoria">
+        <input type="text" id="nome" placeholder="Nome da mercadoria">
+        <input type="text" id="registro" placeholder="Número de registro">
+
+        <h3>Volume direto (dm³)</h3>
+        <input type="number" id="volume" placeholder="Volume em dm³">
+
+        <h3>Ou insira medidas (opcional)</h3>
+        <input type="number" id="comprimento" placeholder="Comprimento (dm)">
+        <input type="number" id="largura" placeholder="Largura (dm)">
+        <input type="number" id="altura" placeholder="Altura (dm)">
+
+        <button type="submit">Salvar</button>
+      </form>
+      <div id="resultado"></div>
     </div>
 
-    <div class="form-group">
-      <label for="volume">Volume de cada caixa (em decimetros cubicos)</label>
-      <input type="number" id="volume" placeholder="Ex: 50">
-    </div>
-    <div class="form-group">
-     <label for="comprimento">Comprimento (cm)</label>
-     <input type="number" id="comprimento" placeholder="Opcional">
-   </div>
-    <div class="form-group">
-      <label for="largura">Largura (cm)</label>
-      <input type="number" id="largura" placeholder="Opcional">
+    <!-- BUSCAR MERCADORIA -->
+    <div class="caixa">
+      <h2>🔍 Buscar Mercadoria por Registro</h2>
+      <input type="text" id="registroBusca" placeholder="Digite o número de registro">
+      <button id="buscarRegistro">Buscar</button>
+      <div id="resultadoBusca"></div>
     </div>
 
-  <div class="form-group">
-    <label for="altura">Altura (cm)</label>
-    <input type="number" id="altura" placeholder="Opcional">
   </div>
-    <button onclick="calcular()">Calcular</button>
 
-    <!-- Resultado individual -->
-    <div id="resultado" class="resultado"></div>
+  <!-- Seu script como módulo -->
+  <script type="module" src="script.js"></script>
 
-    <!-- Lista de mercadorias -->
-    <h2>📋 Mercadorias Registradas</h2>
-    <ul id="listaMercadorias"></ul>
-
-  <script src="script.js"></script>
+  <!-- JS pequeno para abrir/fechar o cadastro -->
+  <script>
+    document.getElementById("abrirCadastro").addEventListener("click", () => {
+      const box = document.getElementById("cadastroBox");
+      box.style.display = (box.style.display === "none") ? "block" : "none";
+    });
+  </script>
 </body>
 </html>
-
