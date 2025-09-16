@@ -2,57 +2,47 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Mercadorias</title>
+  <title>Calculadora de Carga da Van</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <h1>🚚 Calculadora de Carga da Van</h1>
 
-    <!-- BOTÃO PARA ABRIR O CADASTRO -->
-    <div class="caixa">
-      <button id="abrirCadastro">📦 Registrar Mercadoria</button>
+  <div class="container">
+    <div class="card">
+      <h2>📦 Calcular Volume</h2>
+      <form id="formCalculo">
+        <label>Nome da mercadoria:
+          <input type="text" id="nome" required>
+        </label>
+        <label>Nº Registro:
+          <input type="text" id="registro" required>
+        </label>
+        <label>Volume (m³):
+          <input type="number" id="volume" step="0.001">
+        </label>
+
+        <p>OU informe as dimensões em cm:</p>
+        <label>Comprimento (cm):
+          <input type="number" id="comprimento">
+        </label>
+        <label>Largura (cm):
+          <input type="number" id="largura">
+        </label>
+        <label>Altura (cm):
+          <input type="number" id="altura">
+        </label>
+
+        <button type="submit">Calcular</button>
+      </form>
     </div>
 
-    <!-- FORMULÁRIO DE CADASTRO (inicialmente oculto) -->
-    <div class="caixa" id="cadastroBox" style="display: none;">
-      <h2>📦 Cadastrar Mercadoria</h2>
-      <form id="form-mercadoria">
-        <input type="text" id="nome" placeholder="Nome da mercadoria">
-        <input type="text" id="registro" placeholder="Número de registro">
-
-        <h3>Volume direto (dm³)</h3>
-        <input type="number" id="volume" placeholder="Volume em dm³">
-
-        <h3>Ou insira medidas (opcional)</h3>
-        <input type="number" id="comprimento" placeholder="Comprimento (dm)">
-        <input type="number" id="largura" placeholder="Largura (dm)">
-        <input type="number" id="altura" placeholder="Altura (dm)">
-
-        <button type="submit">Salvar</button>
-      </form>
+    <div class="card">
+      <h2>📊 Resultado</h2>
       <div id="resultado"></div>
     </div>
-
-    <!-- BUSCAR MERCADORIA -->
-    <div class="caixa">
-      <h2>🔍 Buscar Mercadoria por Registro</h2>
-      <input type="text" id="registroBusca" placeholder="Digite o número de registro">
-      <button id="buscarRegistro">Buscar</button>
-      <div id="resultadoBusca"></div>
-    </div>
-
   </div>
 
-  <!-- Seu script como módulo -->
-  <script type="module" src="script.js"></script>
-
-  <!-- JS pequeno para abrir/fechar o cadastro -->
-  <script>
-    document.getElementById("abrirCadastro").addEventListener("click", () => {
-      const box = document.getElementById("cadastroBox");
-      box.style.display = (box.style.display === "none") ? "block" : "none";
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
