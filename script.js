@@ -1,36 +1,37 @@
-// Capacidade da van em m³
-const CAPACIDADE_VAN = 13;
-
-const form = document.getElementById("formCalculo");
-const resultadoDiv = document.getElementById("resultado");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const nome = document.getElementById("nome").value.trim();
-  const registro = document.getElementById("registro").value.trim();
+function calcular() {
+  const nome = document.getElementById("nome").value;
+  const registro = document.getElementById("registro").value;
   let volume = parseFloat(document.getElementById("volume").value);
 
   const comprimento = parseFloat(document.getElementById("comprimento").value);
   const largura = parseFloat(document.getElementById("largura").value);
   const altura = parseFloat(document.getElementById("altura").value);
 
-  // Se não informar volume, calcular pelas medidas em cm
-  if (!volume && comprimento && largura && altura) {
-    volume = (comprimento * largura * altura) / 1000000; // cm³ → m³
+  const capacidadeVan = 13; // m³ da van
+
+  // Se não informar volume, calcula pelas dimensões em cm
+  if (isNaN(volume) && comprimento && largura && altura) {
+    volume = (comprimento * largura * altura) / 1000000; // cm³ -> m³
   }
 
-  if (!volume) {
-    resultadoDiv.innerHTML = "⚠️ Informe o volume em m³ ou todas as medidas em cm.";
+  if (!nome || !registro || isNaN(volume) || volume <= 0) {
+    alert("Preencha o nome, nº de registro e informe o volume ou as dimensões.");
     return;
   }
 
-  const qtdCaixas = Math.floor(CAPACIDADE_VAN / volume);
+  const quantidadeCaixas = Math.floor(capacidadeVan / volume);
+  const ocupado = quantidadeCaixas * volume;
+  const sobra = capacidadeVan - ocupado;
 
-  resultadoDiv.innerHTML = `
-    <p><strong>Nome:</strong> ${nome}</p>
-    <p><strong>Registro:</strong> ${registro}</p>
-    <p><strong>Volume da mercadoria:</strong> ${volume.toFixed(3)} m³</p>
-    <p><strong>Cabem na van:</strong> ${qtdCaixas} unidades</p>
+  let mensagem = `
+    <p><strong>Mercadoria:</strong> ${nome}</p>
+    <p><strong>Nº Registro:</strong> ${registro}</p>
+    <p><strong>Volume de cada caixa:</strong> ${volume.toFixed(3)} m³</p>
+    <p><strong>Quantidade que cabe na van:</strong> ${quantidadeCaixas} caixas</p>
+    <p><strong>Espaço ocupado:</strong> ${ocupado.toFixed(2)} m³</p>
+    <p><strong>Espaço restante:</strong> ${sobra.toFixed(2)} m³</p>
   `;
-});
+
+  document.getElementById("resultado").innerHTML = mensagem;
+  document.getElementById("resultadoCard").style.display = "block";
+}

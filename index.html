@@ -2,42 +2,38 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora de Carga da Van</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Carga da Van</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🚚 Calculadora de Carga da Van</h1>
-
   <div class="container">
+    <h1>🚐 Simulador de Carga da Van</h1>
+
+    <!-- Card Principal -->
     <div class="card">
       <h2>📦 Calcular Volume</h2>
-      <form id="formCalculo">
-        <label>Nome da mercadoria:
-          <input type="text" id="nome" required>
-        </label>
-        <label>Nº Registro:
-          <input type="text" id="registro" required>
-        </label>
-        <label>Volume (m³):
-          <input type="number" id="volume" step="0.001">
-        </label>
+      <label>Nome da mercadoria:</label>
+      <input type="text" id="nome">
 
-        <p>OU informe as dimensões em cm:</p>
-        <label>Comprimento (cm):
-          <input type="number" id="comprimento">
-        </label>
-        <label>Largura (cm):
-          <input type="number" id="largura">
-        </label>
-        <label>Altura (cm):
-          <input type="number" id="altura">
-        </label>
+      <label>Nº Registro:</label>
+      <input type="text" id="registro">
 
-        <button type="submit">Calcular</button>
-      </form>
+      <label>Volume de cada caixa (m³):</label>
+      <input type="number" id="volume" step="0.001">
+
+      <p class="ou">OU informe as dimensões da caixa em cm:</p>
+      <div class="dimensoes">
+        <input type="number" id="comprimento" placeholder="Comprimento (cm)">
+        <input type="number" id="largura" placeholder="Largura (cm)">
+        <input type="number" id="altura" placeholder="Altura (cm)">
+      </div>
+
+      <button onclick="calcular()">Calcular</button>
     </div>
 
-    <div class="card">
+    <!-- Card de Resultado -->
+    <div class="card resultado" id="resultadoCard">
       <h2>📊 Resultado</h2>
       <div id="resultado"></div>
     </div>
